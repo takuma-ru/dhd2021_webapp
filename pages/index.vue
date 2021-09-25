@@ -1,9 +1,19 @@
 <template>
-  <v-row>
-    <v-col>
-      <SubjectInfoCard name="nickname" />
-    </v-col>
-  </v-row>
+  <v-container>
+    <v-row style="">
+      <v-col>
+        <SubjectInfoCard
+          v-for="(item, i) in soracom"
+          :key="i"
+          :name="item.name"
+          :face-img-path="item.faceImgPath"
+          :github="item.github"
+          :twitter="item.twitter"
+          :novelty="item.novelty"
+        />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -12,7 +22,29 @@ export default {
   components: { SubjectInfoCard },
   data () {
     return {
-      msg: 'nickname'
+      soracom: [
+        {
+          name: 'name',
+          github: 'asd',
+          twitter: 'asd',
+          novelty: ['asd', 'fgh'],
+          faceImgPath: 'https://picsum.photos/id/11/500/300'
+        },
+        {
+          name: 'name',
+          github: 'asd',
+          twitter: 'asd',
+          novelty: ['asd', 'fgh'],
+          faceImgPath: 'https://picsum.photos/id/11/500/300'
+        },
+        {
+          name: 'name',
+          github: 'asd',
+          twitter: 'asd',
+          novelty: ['asd', 'fgh'],
+          faceImgPath: 'https://picsum.photos/id/11/500/300'
+        }
+      ]
     }
   }
 }
