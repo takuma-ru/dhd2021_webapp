@@ -32,8 +32,6 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    // https://go.nuxtjs.dev/eslint
-    '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify'
   ],
@@ -43,7 +41,8 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    '@nuxtjs/firebase'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -54,6 +53,22 @@ export default {
     manifest: {
       lang: 'ja'
     }
+  },
+
+  firebase: {
+    config: {
+      apiKey: process.env.APIKEY,
+      authDomain: process.env.AUTHDOMAIN,
+      projectId: process.env.PROJECTID,
+      storageBucket: process.env.STORAGEBUCKET,
+      messagingSenderId: process.env.MESSAGINGSENDERID,
+      appId: process.env.APPID,
+      measurementId: process.env.MEASUREMENTID,
+    },
+    services: {
+      storage: true,
+      database: true,
+    },
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
