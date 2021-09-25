@@ -4,10 +4,12 @@
       flat
       fixed
       app
-      color="#66D3A7"
+      color="origGreen"
       class="rounded-b-lg"
     >
-      <v-toolbar-title>Digital Hack Day 2021 team Apple</v-toolbar-title>
+      <v-toolbar-title color="back">
+        Digital Hack Day 2021 team Apple
+      </v-toolbar-title>
       <v-spacer />
     </v-app-bar>
     <v-main>
