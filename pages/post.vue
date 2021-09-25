@@ -11,6 +11,7 @@
             v-model="name"
             :rules="[() => !!name || 'This field is required']"
             :error-messages="errorMessages"
+            prepend-icon="mdi-account"
             label="ニックネーム"
             placeholder="あなたの通称を入力してください"
             required
@@ -18,6 +19,7 @@
           <v-text-field
             ref="github"
             v-model="github"
+            prepend-icon="mdi-github"
             label="Githubネーム"
             placeholder="Githubのユーザーネームを入力してください"
             required
@@ -25,19 +27,21 @@
           <v-text-field
             ref="twitter"
             v-model="twitter"
+            prepend-icon="mdi-twitter"
             label="Twitterアカウント"
             placeholder="Twitterのアカウント名を入力してください"
             required
           />
-          <v-card-text class="py-6 black--text">
+          <v-card-text class="px-0 py-6 black--text">
             <v-icon class="mr-4">mdi-tag</v-icon>
             <v-chip
               v-for="item in novelty"
               :key="item"
               dark
+              :color="novelty_sticker_items[item].color"
               class="mx-1 my-1"
             >
-              {{ novelty[item].name }}
+              {{ novelty_sticker_items[item].name }}
             </v-chip>
 
             <v-btn
@@ -100,6 +104,18 @@
                             </v-chip>
                             {{ item.description }}
                           </v-list-item-title>
+                          <v-list-item-avatar
+                            min-width="100px"
+                            min-height="100px"
+                            tile
+                            class="rounded-lg"
+                          >
+                            <v-img
+                              :src="`./${item.imgPath}`"
+                              width="100%"
+                              height="100%"
+                            ></v-img>
+                          </v-list-item-avatar>
                         </template>
                       </v-list-item>
                     </v-list-item-group>
@@ -181,10 +197,10 @@ export default {
     twitter: null,
     novelty: [],
     novelty_sticker_items: [
-      { name: 'mapbox', description: 'map' },
-      { name: 'mapbox', description: 'map' },
-      { name: 'mapbox', description: 'map' },
-      { name: 'mapbox', description: 'map' }
+      { name: 'HackDays',　color: '#31B5C1', description: 'Digital Hack Day 2021のステッカー', imgPath: 'hackday.jpg' },
+      { name: 'HackDays',　color: '#31B5C1', description: 'Digital Hack Day 2021のステッカー', imgPath: 'hackday.jpg' },
+      { name: 'HackDays',　color: '#31B5C1', description: 'Digital Hack Day 2021のステッカー', imgPath: 'hackday.jpg' },
+      { name: 'HackDays',　color: '#31B5C1', description: 'Digital Hack Day 2021のステッカー', imgPath: 'hackday.jpg' },
     ],
     tag_sheet: false,
     formHasErrors: false

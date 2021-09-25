@@ -1,17 +1,19 @@
 <template>
-  <v-row style="">
-    <v-col>
-      <SubjectInfoCard
-        v-for="(item, i) in soracom"
-        :key="i"
-        :name="item.name"
-        :face-img-path="item.faceImgPath"
-        :github="item.github"
-        :twitter="item.twitter"
-        :novelty="item.novelty"
-      />
-    </v-col>
-  </v-row>
+  <v-container>
+    <v-row style="">
+      <v-col>
+        <SubjectInfoCard
+          v-for="(item, i) in soracom"
+          :key="i"
+          :name="item.name"
+          :face-img-path="item.faceImgPath"
+          :github="item.github"
+          :twitter="item.twitter"
+          :novelty="item.novelty"
+        />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
