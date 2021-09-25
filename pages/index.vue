@@ -1,17 +1,14 @@
 <template>
   <v-container>
-    <v-row style="">
-      <v-col>
-        <SubjectInfoCard
-          v-for="(item, i) in soracom"
-          :key="i"
-          :name="item.name"
-          :face-img-path="item.faceImgPath"
-          :github="item.github"
-          :twitter="item.twitter"
-          :novelty="item.novelty"
-        />
-      </v-col>
+    <v-row justify="center" align="center">
+      <SubjectInfoCard
+        v-for="(item, i) in soracomData"
+        :key="i"
+        :name="'ryoki'"
+        :github="item.github"
+        :twitter="item.twitter"
+        :novelty="item.novelty"
+      />
     </v-row>
   </v-container>
 </template>
@@ -22,30 +19,22 @@ export default {
   components: { SubjectInfoCard },
   data () {
     return {
-      soracom: [
-        {
-          name: 'name',
-          github: 'asd',
-          twitter: 'asd',
-          novelty: ['asd', 'fgh'],
-          faceImgPath: 'https://picsum.photos/id/11/500/300'
-        },
-        {
-          name: 'name',
-          github: 'asd',
-          twitter: 'asd',
-          novelty: ['asd', 'fgh'],
-          faceImgPath: 'https://picsum.photos/id/11/500/300'
-        },
-        {
-          name: 'name',
-          github: 'asd',
-          twitter: 'asd',
-          novelty: ['asd', 'fgh'],
-          faceImgPath: 'https://picsum.photos/id/11/500/300'
-        }
-      ]
+
     }
+  },
+
+  computed: {
+    soracomData() {
+      return this.$store.state.soracomData
+    }
+  },
+
+  mounted() {
+    this.$store.dispatch('getUserProfile')
+    this.$store.dispatch('getFileUrl', 'ryoki')
+  },
+
+  methods :{
   }
 }
 </script>
