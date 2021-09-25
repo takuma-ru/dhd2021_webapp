@@ -4,7 +4,7 @@
       <SubjectInfoCard
         v-for="(item, i) in soracom"
         :key="i"
-        :name="item.nickname"
+        :name="item.name"
         :face-img-path="item.faceImgPath"
         :github="item.github"
         :twitter="item.twitter"
