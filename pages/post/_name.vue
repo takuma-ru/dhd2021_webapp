@@ -1,6 +1,7 @@
 <template>
   <v-container>
     <h3>情報を編集する</h3>
+    {{ parmsName }}
     <v-row justify="center" align="center">
       <v-col
         cols="12"
@@ -22,7 +23,6 @@
             prepend-icon="mdi-github"
             label="Githubネーム"
             placeholder="Githubのユーザーネームを入力してください"
-            required
           />
           <v-text-field
             ref="twitter"
@@ -30,7 +30,6 @@
             prepend-icon="mdi-twitter"
             label="Twitterアカウント"
             placeholder="Twitterのアカウント名を入力してください"
-            required
           />
           <v-card-text class="px-0 py-6 black--text">
             <v-icon class="mr-4">mdi-tag</v-icon>
@@ -187,6 +186,11 @@ import swipemodal from 'nekoo_vue_swipemodal'
 import 'nekoo_vue_swipemodal/dist/swipemodal.css'
 
 export default {
+  async asyncData({ params }) {
+    const parmsName = params.name
+    return {parmsName};
+  },
+
   components: {
     swipemodal
   },
@@ -203,15 +207,23 @@ export default {
       { name: 'HackDays',　color: '#31B5C1', description: 'Digital Hack Day 2021のステッカー', imgPath: 'hackday.jpg' },
     ],
     tag_sheet: false,
-    formHasErrors: false
+    formHasErrors: false,
+    data: undefined
   }),
 
   computed: {
+    soracomData() {
+      return this.$store.state.soracomData
+    },
     form () {
       return {
         name: this.name
       }
     }
+  },
+
+  mounted() {
+    this.$store.dispatch('getUserProfile')
   },
 
   watch: {
@@ -235,11 +247,22 @@ export default {
       Object.keys(this.form).forEach((f) => {
         if (!this.form[f]) {
           this.formHasErrors = true
+        } else {
+          this.$store.dispatch('setUserProfile', {
+            /*name: this.name,
+            github: this.github,
+            twitter: this.twitter,
+            novelty: this.novelty*/
+            /*name: 'userName',
+            github: 'githubName',
+            twitter: 'twitterName',
+            novelty: ['nove1', 'nove2']'*/
+          })
         }
 
         this.$refs[f].validate(true)
       })
-    }
+    },
   }
 }
 </script>

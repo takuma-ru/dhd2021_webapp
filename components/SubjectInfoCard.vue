@@ -29,7 +29,6 @@
             </ul>
           </v-card-text>
         </div>
-
         <v-avatar
           class="ma-3"
           size="125"
@@ -47,6 +46,12 @@
 
 <script>
 export default {
+  data() {
+    return {
+      faceImgPath: undefined
+    }
+  },
+
   props: {
     name: {
       type: String,
@@ -67,12 +72,14 @@ export default {
       type: Array,
       default: null,
       required: false
-    },
-    faceImgPath: {
-      type: String,
-      default: '',
-      required: true
     }
+  },
+
+  mounted() {
+    this.$store.dispatch('getFileUrl', this.name).then(res => {
+      this.faceImgPath = res
+      console.log(res)
+    })
   }
 }
 </script>
