@@ -84,7 +84,7 @@ export const actions = {
   },
 
   async getOverallImgUrl({}) {
-    const storageRef = this.$fire.storage.ref('img').child(`img.jpg`)
+    const storageRef = this.$fire.storage.ref('img').child(`full.png`)
     try {
       const url = await storageRef.getDownloadURL()
       return url

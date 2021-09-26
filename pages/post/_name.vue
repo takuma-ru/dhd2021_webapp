@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    <h3>情報を編集する</h3>
     <v-row justify="center" align="center">
       <v-col xcols="12">
         <v-card-text>

@@ -1,26 +1,27 @@
 <template>
   <v-container fluid>
-    <h3>映っている人一覧</h3>
     <v-row justify="center" align="center">
-      <v-img
-        max-height="600px"
-        max-width="800px"
-        style="background-color: gray"
-        class="rounded-lg"
-        :src="imgPath"
-      ></v-img>
-    </v-row>
-    <v-row justify="center" align="center">
-      <SubjectInfoCard
-        v-for="(item, i) in soracomData"
-        :key="i"
-        :isActive="true"
-        :name="item.name"
-        :github="item.github"
-        :twitter="item.twitter"
-        :novelty_sticker="item.novelty_sticker"
-        :novelty_batch="item.novelty_batch"
-      />
+      <v-col cols="6">
+        <v-img
+          max-height="600px"
+          max-width="800px"
+          style="background-color: gray"
+          class="rounded-lg"
+          :src="imgPath"
+        ></v-img>
+      </v-col>
+      <v-col cols="6">
+        <SubjectInfoCard
+          v-for="(item, i) in soracomData"
+          :key="i"
+          :isActive="true"
+          :name="item.name"
+          :github="item.github"
+          :twitter="item.twitter"
+          :novelty_sticker="item.novelty_sticker"
+          :novelty_batch="item.novelty_batch"
+        />
+      </v-col>
     </v-row>
   </v-container>
 </template>

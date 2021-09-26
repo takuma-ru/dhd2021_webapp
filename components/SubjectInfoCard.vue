@@ -2,7 +2,7 @@
   <div>
     <v-card
       v-if="isActive"
-      color="#66C9D3"
+      color="#6692D3"
       dark
       flat
       class="rounded-lg mx-4 my-4"
@@ -14,7 +14,7 @@
             v-text="name"
           />
 
-          <v-card-text>
+          <v-card-text class="text">
             <strong>情報</strong><br>
             <ul>
               <li>Github： {{ github }}</li>
@@ -26,7 +26,9 @@
           <v-card-actions>
             <v-btn
               depressed
+              color="white"
               class="rounded-lg"
+              style="color: #6692D3"
               @click="$router.push(`post/${name}`)"
             >
               編集する
@@ -35,7 +37,7 @@
         </div>
         <v-avatar
           class="ma-3"
-          size="100"
+          size="150"
           tile
         >
           <v-img
@@ -116,5 +118,9 @@ export default {
 img {
   height: 100%;
   width: auto;
+}
+
+.text {
+  font-size: 1rem;
 }
 </style>
