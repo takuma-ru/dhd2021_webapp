@@ -1,7 +1,10 @@
 <template>
   <v-container fluid>
     <v-row justify="center" align="center">
-      <v-col cols="6">
+      <v-col
+        cols="12"
+        md="6"
+      >
         <v-img
           max-height="600px"
           max-width="800px"
@@ -10,7 +13,12 @@
           :src="imgPath"
         ></v-img>
       </v-col>
-      <v-col cols="6">
+      <v-col
+        cols="12"
+        md="6"
+        style="max-height: 80vh"
+        class="overflow-y-auto cardGroup"
+      >
         <SubjectInfoCard
           v-for="(item, i) in soracomData"
           :key="i"
@@ -72,5 +80,7 @@ export default {
 </script>
 
 <style>
-
+.cardGroup::-webkit-scrollbar {
+  width: 0px;
+}
 </style>

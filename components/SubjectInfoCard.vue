@@ -10,14 +10,32 @@
       <div class="d-flex flex-no-wrap justify-space-between">
         <div>
           <v-card-title
-            class="text-h5"
+            class="text-h4"
             v-text="name"
           />
 
           <v-card-text class="text">
             <strong>情報</strong><br>
-            <ul>
-              <li>Github： {{ github }}</li>
+            <ul style="list-style: none">
+              <li>
+                <table class="my-2">
+                  <thead>
+                    <tr>
+                      <th colspan="2">Github： {{ github }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>会社</td>
+                      <td>{{ githubRes ? (githubRes.posts.company ? githubRes.posts.company : '記載なし' ) : '情報なし' }}</td>
+                    </tr>
+                    <tr>
+                      <td>スター</td>
+                      <td>{{  githubRes ? githubRes.starCount : '情報なし' }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
               <li>twitter： @{{ twitter }}</li>
               <li>novelty sticker： {{ novelty_sticker }}</li>
               <li>novelty batch： {{ novelty_batch }}</li>
@@ -60,7 +78,8 @@ Vue.use(SetInterval)
 export default {
   data() {
     return {
-      faceImgPath: undefined
+      faceImgPath: undefined,
+      githubRes: undefined
     }
   },
 
@@ -109,6 +128,10 @@ export default {
       this.faceImgPath = res
       console.log(res)
     })
+    this.$store.dispatch('getGithubProfile', this.github).then(res => {
+      this.githubRes = res
+      console.log(res)
+    })
   },
 
 }
@@ -122,5 +145,18 @@ img {
 
 .text {
   font-size: 1rem;
+}
+
+li {
+  margin-top: 1vh;
+}
+
+th,td {
+    border: solid 1px;  /* 枠線指定 */
+    padding: 10px;      /* 余白指定 */
+}
+
+table {
+    border-collapse:  collapse; /* セルの線を重ねる */
 }
 </style>

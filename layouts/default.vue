@@ -4,6 +4,7 @@
       fixed
       dark
       app
+      permanent
       mini-variant
       color="#405B84"
       class="rounded-r-lg"
@@ -13,7 +14,7 @@
         dense
         class="my-1"
       >
-        <v-list-item link>
+        <v-list-item link to="/">
           <v-list-item-icon>
             <v-icon>mdi-home</v-icon>
           </v-list-item-icon>

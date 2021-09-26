@@ -93,13 +93,13 @@ export const actions = {
     }
   },
 
-  async getGithubProfile({ $axios }, github) {
+  async getGithubProfile({}, github) {
     // 取得先のurl
-    const url_git = `https://api.github.com/users/hama1185`
-    const url_repo = "https://api.github.com/users/hama1185/repos"
+    const url_git = `https://api.github.com/users/${github}`
+    const url_repo = `https://api.github.com/users/${github}/repos`
     // リクエスト（Get）
-    const response_github = await $axios.$get(url_git)
-    const response_repo = await $axios.$get(url_repo)
+    const response_github = await this.$axios.$get(url_git)
+    const response_repo = await this.$axios.$get(url_repo)
 
     var count = 0
 
@@ -110,7 +110,8 @@ export const actions = {
     return {
       posts: response_github,
       repos : response_repo,
-      star_count : count
+      starCount : count,
+      svgImg: `https://github-contributions-api.deno.dev/${github}.svg`
     }
   }
 }
