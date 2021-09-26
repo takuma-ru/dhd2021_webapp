@@ -38,7 +38,7 @@
               </li>
               <li>twitter： @{{ twitter }}</li>
               <li>novelty sticker： {{ novelty_sticker }}</li>
-              <li>novelty batch： {{ novelty_batch }}</li>
+              <li>novelty badge： {{ novelty_badge }}</li>
             </ul>
           </v-card-text>
           <v-card-actions>
@@ -106,7 +106,7 @@ export default {
       default: null,
       required: false
     },
-    novelty_batch: {
+    novelty_badge: {
       default: null,
       required: false
     }

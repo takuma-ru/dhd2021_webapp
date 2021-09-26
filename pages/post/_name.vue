@@ -63,8 +63,8 @@
             </template>
           </v-select>
           <v-select
-            v-model="novelty_batch"
-            :items="novelty_batch_items"
+            v-model="novelty_badge"
+            :items="novelty_badge_items"
             item-text="name"
             item-value="name"
             prepend-icon="mdi-brightness-1"
@@ -154,13 +154,13 @@ export default {
     github: null,
     twitter: null,
     novelty_sticker: [],
-    novelty_batch: [],
+    novelty_badge: [],
     novelty_sticker_items: [
       { name: 'ライゾマティクス',　color: '#A1DDEE', description: 'ライゾマティクスのバッチ', imgPath: 's_rhizoma_200.png' },
       { name: '梶ラボ',　color: '', description: '梶ラボのバッチ', imgPath: 's_kaji_200.png' },
       { name: 'チームラボ',　color: '#D8CD1C', description: 'チームラボのバッチ', imgPath: 's_teamlab_200.png' },
     ],
-    novelty_batch_items: [
+    novelty_badge_items: [
       { name: 'HackDays',　color: '#31B5C1', description: 'Digital Hack Day 2021のステッカー', imgPath: 'b_hackday_100.png' },
       { name: 'cookpad',　color: '#DE6F27', description: 'cookpadのステッカー', imgPath: 'b_cookpad_100.png' },
       { name: 'github',　color: '#', description: 'githubのステッカー', imgPath: 'b_octcat_100.png' },
@@ -196,7 +196,7 @@ export default {
       this.github = this.specificData.github
       this.twitter = this.specificData.twitter
       this.novelty_sticker = this.specificData.novelty_sticker
-      this.novelty_batch = this.specificData.novelty_batch
+      this.novelty_badge = this.specificData.novelty_badge
     } catch (e) {
       this.specificData = {}
       console.error(e)
@@ -233,7 +233,7 @@ export default {
               github: this.github,
               twitter: this.twitter,
               novelty_sticker: this.novelty_sticker,
-              novelty_batch: this.novelty_batch
+              novelty_badge: this.novelty_badge
             })
           }
           this.$store.dispatch('setUserProfile', {
@@ -241,7 +241,7 @@ export default {
             github: this.github,
             twitter: this.twitter,
             novelty_sticker: this.novelty_sticker,
-            novelty_batch: this.novelty_batch
+            novelty_badge: this.novelty_badge
           })
         }
 

@@ -27,7 +27,7 @@
           :github="item.github"
           :twitter="item.twitter"
           :novelty_sticker="item.novelty_sticker"
-          :novelty_batch="item.novelty_batch"
+          :novelty_badge="item.novelty_badge"
         />
       </v-col>
     </v-row>

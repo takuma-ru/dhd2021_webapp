@@ -30,7 +30,7 @@ export const actions = {
     }
   },
 
-  async setUserProfile({ dispatch }, { oldName, name, github, twitter, novelty_sticker, novelty_batch }) {
+  async setUserProfile({ dispatch }, { oldName, name, github, twitter, novelty_sticker, novelty_badge }) {
     const messageRef = this.$fire.database.ref(`user/${name}`)
     try {
       await messageRef.set({
@@ -38,7 +38,7 @@ export const actions = {
         github: github,
         twitter: twitter,
         novelty_sticker: novelty_sticker, //Array
-        novelty_batch: novelty_batch, //Array
+        novelty_badge: novelty_badge, //Array
       }).then(() => {
         dispatch('delOldUserProfile', oldName)
       })
