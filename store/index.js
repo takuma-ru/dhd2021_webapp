@@ -1,22 +1,46 @@
 export const state = () => ({
-  soracomData: {}
+  soracomData: {},
+  specificData: {}
 })
 
 export const mutations = {
   updateSoracomData (state, status) {
     state.soracomData = status
   },
+  updateSpecificData (state, status) {
+    state.specificData = status
+  },
 }
 
 export const actions = {
-  async setUserProfile({  }, { name, github, twitter, novelty }) {
+  async getGithubProfileImg({ $axios }, githubName) {
+    const response_github = await this.$axios.$get(`https://github-contributions-api.deno.dev/${githubName}.svg`)
+    // クロスオリジンエラー！！
+    console.log(response_github)
+  },
+
+
+  async delOldUserProfile({}, oldName) {
+    const messageRef = this.$fire.database.ref(`user/${oldName}`)
+    try {
+      await messageRef.remove()
+    } catch(e) {
+      console.error(e)
+      return
+    }
+  },
+
+  async setUserProfile({ dispatch }, { oldName, name, github, twitter, novelty_sticker, novelty_batch }) {
     const messageRef = this.$fire.database.ref(`user/${name}`)
     try {
       await messageRef.set({
         name: name,
         github: github,
         twitter: twitter,
-        novelty: novelty, //Array
+        novelty_sticker: novelty_sticker, //Array
+        novelty_batch: novelty_batch, //Array
+      }).then(() => {
+        dispatch('delOldUserProfile', oldName)
       })
     } catch (e) {
       console.error(e)
@@ -25,11 +49,22 @@ export const actions = {
     console.log('Success.')
   },
 
-  async getUserProfile({ commit }) {
+  async getAllUserProfile({ commit }) {
     const messageRef = this.$fire.database.ref('user')
     try {
       const snapshot = await messageRef.once('value')
       commit('updateSoracomData', snapshot.val())
+      console.log(snapshot.val())
+    } catch (e) {
+      console.error(e)
+      return
+    }
+  },
+  async getSpecificUserProfile({ commit }, name){
+    const messageRef = this.$fire.database.ref(`user${name}`)
+    try {
+      const snapshot = await messageRef.once('value')
+      commit('updateSpecificData', snapshot.val())
       console.log(snapshot.val())
     } catch (e) {
       console.error(e)

@@ -1,13 +1,15 @@
 <template>
   <v-container>
+    <h3>映っている人一覧</h3>
     <v-row justify="center" align="center">
       <SubjectInfoCard
         v-for="(item, i) in soracomData"
         :key="i"
-        :name="'ryoki'"
+        :name="item.name"
         :github="item.github"
         :twitter="item.twitter"
-        :novelty="item.novelty"
+        :novelty_sticker="item.novelty_sticker"
+        :novelty_batch="item.novelty_batch"
       />
     </v-row>
   </v-container>
@@ -30,7 +32,7 @@ export default {
   },
 
   mounted() {
-    this.$store.dispatch('getUserProfile')
+    this.$store.dispatch('getAllUserProfile')
     this.$store.dispatch('getFileUrl', 'ryoki')
   },
 
