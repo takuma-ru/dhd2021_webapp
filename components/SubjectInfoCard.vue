@@ -18,25 +18,29 @@
             <ul>
               <li>Github： {{ github }}</li>
               <li>twitter： @{{ twitter }}</li>
-              <li>
-                novelty：
-                <ul>
-                  <li v-for="(item, i) in novelty" :key="i">
-                    {{ item }}
-                  </li>
-                </ul>
-              </li>
+              <li>novelty sticker： {{ novelty_sticker }}</li>
+              <li>novelty batch： {{ novelty_batch }}</li>
             </ul>
           </v-card-text>
+          <v-card-actions>
+            <v-btn
+              depressed
+              class="rounded-lg"
+              @click="$router.push(`post/${name}`)"
+            >
+              編集する
+            </v-btn>
+          </v-card-actions>
         </div>
         <v-avatar
           class="ma-3"
-          size="125"
+          size="100"
           tile
         >
           <v-img
             class="rounded-lg"
             :src="faceImgPath"
+            style="background-color: gray"
           />
         </v-avatar>
       </div>
@@ -68,7 +72,12 @@ export default {
       default: '',
       required: false
     },
-    novelty: {
+    novelty_sticker: {
+      type: Array,
+      default: null,
+      required: false
+    },
+    novelty_batch: {
       type: Array,
       default: null,
       required: false

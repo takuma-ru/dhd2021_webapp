@@ -8,7 +8,7 @@
       class="rounded-b-lg"
     >
       <v-toolbar-title color="back">
-        Digital Hack Day 2021 team Apple
+        Face2Deco
       </v-toolbar-title>
       <v-spacer />
     </v-app-bar>

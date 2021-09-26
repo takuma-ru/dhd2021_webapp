@@ -1,11 +1,8 @@
 <template>
   <v-container>
     <h3>情報を編集する</h3>
-    {{ parmsName }}
     <v-row justify="center" align="center">
-      <v-col
-        cols="12"
-      >
+      <v-col xcols="12">
         <v-card-text>
           <v-text-field
             ref="name"
@@ -31,112 +28,74 @@
             label="Twitterアカウント"
             placeholder="Twitterのアカウント名を入力してください"
           />
-          <v-card-text class="px-0 py-6 black--text">
-            <v-icon class="mr-4">mdi-tag</v-icon>
-            <v-chip
-              v-for="item in novelty"
-              :key="item"
-              dark
-              :color="novelty_sticker_items[item].color"
-              class="mx-1 my-1"
-            >
-              {{ novelty_sticker_items[item].name }}
-            </v-chip>
-
-            <v-btn
-              v-model="tag_sheet"
-              class="mx-1"
-              rounded
-              depressed
-              color="grey darken-2"
-              dark
-              @click="tag_sheet = true"
-            >
-              <v-icon >mdi-plus</v-icon>
-              <span>ノベルティを追加</span>
-            </v-btn>
-            <swipemodal
-              v-model="tag_sheet"
-              height="auto"
-              width="800px"
-              max-width="100vw"
-              radius="10px"
-            >
-              <v-sheet
-                class="px-4 py-4 rounded-t-lg"
-              >
-                <v-card-title class="font-weight-black">
-                  ノベルティの追加
-                </v-card-title>
-
-                <v-divider class="mx-2" />
-
-                <v-card-text>
-                  <v-list rounded dense>
-                    <v-list-item-group
-                      v-model="novelty"
-                      multiple
-                      active-class=""
-                    >
-                      <v-list-item
-                        v-for="(item, i) in novelty_sticker_items"
-                        :key="i"
-                        light
-                        :color="item.color"
-                      >
-                        <template #default="{ active }">
-                          <v-list-item-action>
-                            <v-checkbox
-                              :input-value="active"
-                              :color="item.color"
-                              :ripple="false"
-                            />
-                          </v-list-item-action>
-                          <v-list-item-title>
-                            <v-chip
-                              dark
-                              small
-                              :color="item.color"
-                              class="mr-4"
-                            >
-                              {{ item.name }}
-                            </v-chip>
-                            {{ item.description }}
-                          </v-list-item-title>
-                          <v-list-item-avatar
-                            min-width="100px"
-                            min-height="100px"
-                            tile
-                            class="rounded-lg"
-                          >
-                            <v-img
-                              :src="`./${item.imgPath}`"
-                              width="100%"
-                              height="100%"
-                            ></v-img>
-                          </v-list-item-avatar>
-                        </template>
-                      </v-list-item>
-                    </v-list-item-group>
-                  </v-list>
-                </v-card-text>
-
-                <v-divider class="mx-2 mb-4" />
-
-                <v-card-actions>
-                  <v-spacer />
-                  <v-btn
-                    dark
-                    depressed
-                    color="MY_blue"
-                    @click="tag_sheet = false"
-                  >
-                    <v-icon class="mr-1">mdi-check</v-icon>OK
-                  </v-btn>
-                </v-card-actions>
-              </v-sheet>
-            </swipemodal>
-          </v-card-text>
+          <v-select
+            v-model="novelty_sticker"
+            :items="novelty_sticker_items"
+            item-text="name"
+            item-value="name"
+            prepend-icon="mdi-checkbox-blank"
+            label="ステッカー"
+            placeholder="付けたいステッカーを選択してください"
+            :multiple="false"
+          >
+            <template v-slot:item="{ item }">
+                <v-chip :color="item.color">
+                  {{ item.name }}
+                </v-chip>
+                <v-spacer />
+                <span class="ml-3">
+                  {{ item.description }}
+                </span>
+                <v-spacer />
+                <v-list-item-avatar
+                  min-width="100px"
+                  min-height="100px"
+                  tile
+                  right
+                  class="rounded-lg"
+                >
+                  <v-img
+                    :src="`/${item.imgPath}`"
+                    width="100%"
+                    height="100%"
+                  ></v-img>
+                </v-list-item-avatar>
+            </template>
+          </v-select>
+          <v-select
+            v-model="novelty_batch"
+            :items="novelty_batch_items"
+            item-text="name"
+            item-value="name"
+            prepend-icon="mdi-brightness-1"
+            label="バッチ"
+            placeholder="付けたいバッチを選択してください"
+            :multiple="false"
+          >
+            <template v-slot:item="{ item }">
+                <v-chip :color="item.color">
+                  {{ item.name }}
+                </v-chip>
+                <v-spacer />
+                <span class="ml-3">
+                  {{ item.description }}
+                </span>
+                <v-spacer />
+                <v-list-item-avatar
+                  min-width="100px"
+                  min-height="100px"
+                  tile
+                  right
+                  class="rounded-lg"
+                >
+                  <v-img
+                    :src="`/${item.imgPath}`"
+                    width="100%"
+                    height="100%"
+                  ></v-img>
+                </v-list-item-avatar>
+            </template>
+          </v-select>
         </v-card-text>
 
         <v-divider class="mt-12" />
@@ -186,11 +145,6 @@ import swipemodal from 'nekoo_vue_swipemodal'
 import 'nekoo_vue_swipemodal/dist/swipemodal.css'
 
 export default {
-  async asyncData({ params }) {
-    const parmsName = params.name
-    return {parmsName};
-  },
-
   components: {
     swipemodal
   },
@@ -199,16 +153,23 @@ export default {
     name: null,
     github: null,
     twitter: null,
-    novelty: [],
+    novelty_sticker: [],
+    novelty_batch: [],
     novelty_sticker_items: [
       { name: 'HackDays',　color: '#31B5C1', description: 'Digital Hack Day 2021のステッカー', imgPath: 'hackday.jpg' },
-      { name: 'HackDays',　color: '#31B5C1', description: 'Digital Hack Day 2021のステッカー', imgPath: 'hackday.jpg' },
-      { name: 'HackDays',　color: '#31B5C1', description: 'Digital Hack Day 2021のステッカー', imgPath: 'hackday.jpg' },
-      { name: 'HackDays',　color: '#31B5C1', description: 'Digital Hack Day 2021のステッカー', imgPath: 'hackday.jpg' },
+      { name: 'cookpad',　color: '#DE6F27', description: 'cookpadのステッカー', imgPath: 'hackday.jpg' },
+      { name: 'github',　color: '#', description: 'githubのステッカー', imgPath: 'hackday.jpg' },
+    ],
+    novelty_batch_items: [
+      { name: 'ライゾマティクス',　color: '#A1DDEE', description: 'ライゾマティクスのバッチ', imgPath: 'hackday.jpg' },
+      { name: '梶ラボ',　color: '', description: '梶ラボのバッチ', imgPath: 'hackday.jpg' },
+      { name: 'チームラボ',　color: '#D8CD1C', description: 'チームラボのバッチ', imgPath: 'hackday.jpg' },
     ],
     tag_sheet: false,
     formHasErrors: false,
-    data: undefined
+    errorMessages: [],
+    specificData: {},
+    parmsName: null,
   }),
 
   computed: {
@@ -222,8 +183,25 @@ export default {
     }
   },
 
-  mounted() {
-    this.$store.dispatch('getUserProfile')
+  async mounted() {
+    // this.$store.dispatch('getGithubProfileImg', 'takuma-ru')
+
+    this.parmsName = this.$route.params.name
+    console.log(this.parmsName)
+    const messageRef = this.$fire.database.ref(`user/${this.parmsName}`)
+    try {
+      const snapshot = await messageRef.once('value')
+      this.specificData = snapshot.val()
+      this.name = this.specificData.name
+      this.github = this.specificData.github
+      this.twitter = this.specificData.twitter
+      this.novelty_sticker = this.specificData.novelty_sticker
+      this.novelty_batch = this.specificData.novelty_batch
+    } catch (e) {
+      this.specificData = {}
+      console.error(e)
+      return
+    }
   },
 
   watch: {
@@ -248,15 +226,22 @@ export default {
         if (!this.form[f]) {
           this.formHasErrors = true
         } else {
+          if(this.name != this.specificData.name) {
+            this.$store.dispatch('setUserProfile', {
+              oldName: this.specificData.name,
+              name: this.name,
+              github: this.github,
+              twitter: this.twitter,
+              novelty_sticker: this.novelty_sticker,
+              novelty_batch: this.novelty_batch
+            })
+          }
           this.$store.dispatch('setUserProfile', {
-            /*name: this.name,
+            name: this.name,
             github: this.github,
             twitter: this.twitter,
-            novelty: this.novelty*/
-            /*name: 'userName',
-            github: 'githubName',
-            twitter: 'twitterName',
-            novelty: ['nove1', 'nove2']'*/
+            novelty_sticker: this.novelty_sticker,
+            novelty_batch: this.novelty_batch
           })
         }
 
