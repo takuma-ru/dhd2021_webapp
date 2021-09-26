@@ -9,8 +9,9 @@
             v-model="name"
             :rules="[() => !!name || 'This field is required']"
             :error-messages="errorMessages"
+            readonly
+            label="ニックネーム※今回は編集できません"
             prepend-icon="mdi-account"
-            label="ニックネーム"
             placeholder="あなたの通称を入力してください"
             required
           />
@@ -157,7 +158,7 @@ export default {
     novelty_batch: [],
     novelty_sticker_items: [
       { name: 'HackDays',　color: '#31B5C1', description: 'Digital Hack Day 2021のステッカー', imgPath: 'hackday.jpg' },
-      { name: 'cookpad',　color: '#DE6F27', description: 'cookpadのステッカー', imgPath: 'hackday.jpg' },
+      { name: 'cookpad',　color: '#DE6F27', description: 'cookpadのステッカー', imgPath: 'cookpad.png' },
       { name: 'github',　color: '#', description: 'githubのステッカー', imgPath: 'hackday.jpg' },
     ],
     novelty_batch_items: [

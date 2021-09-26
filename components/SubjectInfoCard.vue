@@ -1,6 +1,7 @@
 <template>
   <div>
     <v-card
+      v-if="isActive"
       color="#66C9D3"
       dark
       flat
@@ -49,6 +50,11 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import SetInterval from '@/plugins/SetInterval/index.js'
+
+Vue.use(SetInterval)
+
 export default {
   data() {
     return {
@@ -57,6 +63,9 @@ export default {
   },
 
   props: {
+    isActive: {
+      type: Boolean,
+    },
     name: {
       type: String,
       default: '',
@@ -73,15 +82,24 @@ export default {
       required: false
     },
     novelty_sticker: {
-      type: Array,
       default: null,
       required: false
     },
     novelty_batch: {
-      type: Array,
       default: null,
       required: false
     }
+  },
+
+  created() {
+    this.$setInterval(() => {
+      const date = new Date()
+      console.log(date)
+      this.$store.dispatch('getFileUrl', this.name).then(res => {
+        this.faceImgPath = res
+        console.log(res)
+      })
+    }, 5000)
   },
 
   mounted() {
@@ -89,7 +107,8 @@ export default {
       this.faceImgPath = res
       console.log(res)
     })
-  }
+  },
+
 }
 </script>
 

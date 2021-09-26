@@ -13,9 +13,7 @@
       <v-spacer />
     </v-app-bar>
     <v-main>
-      <v-container class="mx-2">
-        <Nuxt />
-      </v-container>
+      <Nuxt />
     </v-main>
   </v-app>
 </template>

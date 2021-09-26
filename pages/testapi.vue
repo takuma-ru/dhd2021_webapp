@@ -20,11 +20,24 @@ export default {
       star_count: count,
     };
   },
+
+  methods: {
+    add() {
+      this.$store.dispatch('setUserProfile', {
+        name: 'miura',
+        github: 'asd',
+        twitter: 'asd',
+        novelty_sticker: 'github',
+        novelty_batch: 'チームラボ'
+      })
+    }
+  }
 };
 </script>
 
 <template>
   <div>
+    <v-btn @click="add">add</v-btn>
     <p>{{ posts.login }}</p>
     <p>{{ posts.company }}</p>
     <p>{{ posts.bio }}</p>
