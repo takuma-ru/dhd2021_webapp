@@ -47,6 +47,7 @@ export const actions = {
       return
     }
     console.log('Success.')
+    this.$router.push(`/`)
   },
 
   async getAllUserProfile({ commit }) {
