@@ -83,6 +83,16 @@ export const actions = {
     }
   },
 
+  async getOverallImgUrl({}) {
+    const storageRef = this.$fire.storage.ref('img').child(`img.jpg`)
+    try {
+      const url = await storageRef.getDownloadURL()
+      return url
+    } catch (e) {
+      console.error(e.message)
+    }
+  },
+
   async getGithubProfile({ $axios }, github) {
     // 取得先のurl
     const url_git = `https://api.github.com/users/hama1185`
